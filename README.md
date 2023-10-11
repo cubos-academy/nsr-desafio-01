@@ -1,3 +1,5 @@
+![](https://i.imgur.com/xG74tOh.png)
+
 # 🚀 Desafio Técnico: APOD Telegram Bot
 
 ## 🌌 Visão Geral do Projeto:
