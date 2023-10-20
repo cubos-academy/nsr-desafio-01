@@ -1,0 +1,21 @@
+repos:
+- hooks:
+  - id: commitizen
+    stages:
+    - commit-msg
+  repo: https://github.com/commitizen-tools/commitizen
+  rev: 3.12.0
+- hooks:
+  - id: interrogate
+    args: [--vv, -i, --fail-under=80]
+  repo: https://github.com/econchick/interrogate
+  rev: 1.5.0
+- hooks:
+  - id: isort
+  repo: https://github.com/timothycrosley/isort
+  rev: 5.12.0
+- hooks:
+  - id: black
+  repo: https://github.com/ambv/black
+  rev: 23.10.0
+
