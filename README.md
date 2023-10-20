@@ -33,10 +33,10 @@ Seu aplicativo deve ser capaz de fazer o seguinte:
 O vencedor deste desafio receberá uma assinatura de 1 ano do OnDemand como recompensa pela sua inovação e esforço!
 
 ## 📅 Cronograma:
-18/10 a 22/10 - Período de envio do desafio.
-23/10 a 27/10 - Período de correção.
-27/10 - Anúncio do vencedor.
-31/10 - Entrega do acesso da assinatura.
+- 18/10 a 22/10 - Período de envio do desafio.
+- 23/10 a 27/10 - Período de correção.
+- 27/10 - Anúncio do vencedor.
+- 31/10 - Entrega do acesso da assinatura.
 
 ## 📥 Submissão:
 Ao concluir, faça um Pull Request para este repositório com seu código e um README explicando a lógica utilizada, dificuldades encontradas durante o desenvolvimento e como interagir com o bot (lista de comandos, etc.). No README, inclua também um link para o bot no Telegram para facilitar o teste. Lembre-se de incluir seu nome completo no Pull Request.
