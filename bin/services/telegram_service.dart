@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import './nasa_service.dart';
 import '../helpers/env.dart';
 import '../helpers/http_client.dart';
 import '../models/nasa_apod_model.dart';
-import 'nasa_service.dart';
 
 class TelegramService {
   final HttpClient _httpClient;
@@ -71,27 +71,42 @@ class TelegramService {
         'Sending APOD on chat id $chatId for message $offset id and command $command',
       );
 
-      if (command.contains('/getapodwithespecificdate')) {
+      if (command.contains('/apod')) {
+        late final DateTime date;
+
+        final splitCommand = command.split(' ');
+
+        if (splitCommand.length == 1) {
+          sendAPODMessage(chatId.toString());
+          continue;
+        }
+
         try {
-          final splitCommand = command.split(' ');
           final dateParts = splitCommand[1].split('/');
-          final date = DateTime(
+          date = DateTime(
             int.parse(dateParts[2]),
             int.parse(dateParts[1]),
             int.parse(dateParts[0]),
           );
-          sendMessage(chatId.toString(), date: date);
+
+          sendAPODMessage(chatId.toString(), date: date);
         } catch (e) {
           print(e);
-          sendErrorMessage(
+          sendTextMessage(
             chatId.toString(),
             'Data inválida. Tente novamente. \nFormato aceito: dd/mm/yyyy',
           );
         }
-      } else if (command.contains('/getapod')) {
-        sendMessage(chatId.toString());
+      } else if (command == '/help' || command == '/start') {
+        sendTextMessage(
+          chatId.toString(),
+          'Comandos disponíveis: \n/apod dd/mm/yyyy - Busca a imagem da data informada. \n/apod - Busca a imagem do dia atual. \n/about - Informações sobre o bot. \n/help - Lista de comandos disponíveis.',
+        );
+      } else if (command == '/about') {
+        sendTextMessage(chatId.toString(),
+            'Bot desenvolvido por @vinisoaresr. \nCódigo fonte disponível em: https://github.com/vinisoaresr/nsr-desafio-01');
       } else {
-        sendErrorMessage(
+        sendTextMessage(
           chatId.toString(),
           'Comando não reconhecido. Tente novamente.',
         );
@@ -99,7 +114,7 @@ class TelegramService {
     }
   }
 
-  sendMessage(String chatId, {DateTime? date}) async {
+  sendAPODMessage(String chatId, {DateTime? date}) async {
     late final NASAApodModel nasaApodModel;
 
     if (date != null) {
@@ -117,7 +132,7 @@ class TelegramService {
     );
   }
 
-  sendErrorMessage(String chatId, String errorMessage) async {
+  sendTextMessage(String chatId, String errorMessage) async {
     _httpClient.get(
       '$kTelegramBaseURL/bot$kTelegramToken/sendMessage',
       queryParameters: {
