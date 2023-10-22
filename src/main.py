@@ -1,21 +1,18 @@
 import telebot
 import requests
-from datetime import datetime
 
-KEY_BOT = "6734944049:AAFnUpHfYWUSEjBeD0CJASHxlyX8Slt4o-M"
-bot = telebot.TeleBot(KEY_BOT)
+import os
+from dotenv import load_dotenv
 
-KEY_NASA = "vpeLfEp1xeFNAyJf2fHfQ4eIaG0n5cYWfURGw7Ip"
-url = "https://api.nasa.gov/planetary/apod?api_key=" + KEY_NASA
+from utils import validateData, formatedData
+
+load_dotenv()
+
+bot = telebot.TeleBot(os.getenv("KEY_BOT"))
+
+url = "https://api.nasa.gov/planetary/apod?api_key=" + os.getenv("KEY_NASA")
 
 user_data = {}
-
-def validateData(data_str):
-    try:
-        datetime.strptime(data_str, '%d/%m/%Y')
-        return True
-    except ValueError:
-        return False
 
 @bot.message_handler(commands=["commands"])
 def listCommands(message):
@@ -35,54 +32,38 @@ def sendImageWithDate(message):
 
 @bot.message_handler(func=lambda message: user_data.get(message.chat.id) == "date_loading")
 def processar_data(message):
+    del user_data[message.chat.id]
     if not validateData(message.text):
         sendImageWithDate(message)
         return
 
-    formatedDate = datetime.strptime(message.text, "%d/%m/%Y").strftime("%Y-%m-%d")
-    chat_id = message.chat.id
-
-    response = requests.get(url + "&date=" + formatedDate)
-
-    if response.status_code == 200:
-        jsonData = response.json()
-        imageURL = jsonData["url"]
-        imageTitle = jsonData["title"]
-        imageDescription = jsonData["explanation"]
-        bot.send_photo(chat_id, imageURL)
-
-        text = f"""
-            🌌 {imageTitle} 🌌
-            
-            {imageDescription}
-        """
-        bot.send_message(message.chat.id, text)
-    else:
-        print(f"A requisição falhou com o código de status {response.status_code}")
-
-    listCommands(message)
-    del user_data[message.chat.id]
+    response = requests.get(url + "&date=" + formatedData(message.text))
+    reqImage(message, response)
 
 @bot.message_handler(commands=["apod"])
 def sendImageToday(message):
     response = requests.get(url)
+    reqImage(message, response)
+
+def reqImage(message, response):
     chat_id = message.chat.id
+    jsonData = response.json()
 
     if response.status_code == 200:
-        jsonData = response.json()
         imageURL = jsonData["url"]
         imageTitle = jsonData["title"]
         imageDescription = jsonData["explanation"]
         bot.send_photo(chat_id, imageURL)
 
         text = f"""
-           🌌 {imageTitle} 🌌
+               🌌 {imageTitle} 🌌
 
-            {imageDescription}
-        """
+                {imageDescription}
+            """
         bot.send_message(message.chat.id, text)
     else:
         print(f"A requisição falhou com o código de status {response.status_code}")
+        bot.send_message(message.chat.id, jsonData["msg"])
 
     listCommands(message)
 
