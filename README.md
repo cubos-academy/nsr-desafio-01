@@ -6,7 +6,9 @@
 
 Imagine poder começar o dia vendo a imensidão do espaço! Neste desafio, você utilizará suas habilidades em programação para trazer as estrelas mais perto de nós. Você criará um bot de Telegram que enviará a "Astronomy Picture of the Day" (APOD), fornecida pela API da NASA, diretamente em um chat no Telegram.
 
-![](./github/example.gif)
+<img src="https://github.com/vinisoaresr/nsr-desafio-01/blob/main/.github/example.gif"/>
+
+![me](https://github.com/vinisoaresr/nsr-desafio-01/blob/main/.github/example.gif)
 
 ## 📝 Instruções
 
