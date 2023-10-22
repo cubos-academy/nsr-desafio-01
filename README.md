@@ -8,6 +8,27 @@ Imagine poder começar o dia vendo a imensidão do espaço! Neste desafio, você
 
 ![](./github/example.gif)
 
+## 📝 Instruções
+
+### Clonando o Repositório
+
+1. Clone esse repositório usando `git clone git@github.com:vinisoaresr/nsr-desafio-01`
+2. Mova para a pasta clonada usando `cd nsr-desafio-01`
+
+### Configurando o Bot
+
+1. Crie um arquivo `.env` na raiz do projeto utilizando como base o arquivo `example.env`
+2. Preenche o arquivo `.env` com as seguintes informações:
+   - `TELEGRAM_API_KEY` - Token do seu bot do Telegram. Para obter o token, converse com o [BotFather](https://t.me/botfather)
+   - `NGROK_TOKEN` - Token do Ngrok. Para obter o token, acesse o [site do Ngrok](https://ngrok.com/)
+   - `NGROK_DOMAIN` - Domínio do Ngrok. Para obter o domínio, acesse o [site do Ngrok](https://ngrok.com/)
+   - `NASA_API_KEY` - API Key da NASA. Para obter a API Key, acesse o [site da NASA](https://api.nasa.gov/)
+3. Configure corretamente o domínio do Ngrok no arquivo `docker-compose.yml` na linha 16
+
+   - Exemplo: `command: "http backend:8080 --domain=selected-foal-previously.ngrok-free.app"`
+
+4. Execute `docker compose up` para iniciar o servidor do bot junto com o servidor do Ngrok (que será utilizado para criar um tunnel para o seu servidor local e deixar acessível o webhook pelo Telegram)
+
 ## Requisitos do Projeto
 
 Este projeto tem os seguintes requisitos:
@@ -21,7 +42,7 @@ Este projeto tem os seguintes requisitos:
 
 O projeto foi desenvolvido em dart, a aplicação realiza uma requisição ao inicializar para configurar o webhook do telegram (para ser notificado sempre que um chat é atualizado). Durante o funcionamento da aplicação, há 1 rota ("host:8080/") que é acionada pelo telegram e dispara um evento para um service que, a depender do comando enviado, pode realizar uma requisição à API da NASA, para enviar a imagem para o chat, ou enviar outro tipo de mensagem (como um help, por exemplo).
 
-# Principais dificuldades encontradas durante o desenvolvimento
+### Principais dificuldades encontradas durante o desenvolvimento
 
 - Aprender a usar a API da NASA.
 - Aprender a usar a API do Telegram.
@@ -33,7 +54,7 @@ O bot pode ser acessado pelo seguinte link:
 
 https://t.me/apod_bot
 
-# Comandos
+## Comandos
 
 > /apod - Para obter a imagem do dia, basta enviar uma mensagem para o bot sem nenhum texto.
 
@@ -46,7 +67,3 @@ https://t.me/apod_bot
 # Conclusão
 
 Este projeto foi um desafio interessante e gratificante. Através dele, aprendi a usar a API da NASA e a API do Telegram para criar um bot que pode ser usado para obter imagens astronômicas.
-
-O projeto está disponível no GitHub:
-
-https://github.com/bard/apod_bot
