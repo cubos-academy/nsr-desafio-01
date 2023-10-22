@@ -4,6 +4,7 @@ FROM dart:stable AS build
 # Resolve app dependencies.
 WORKDIR /app
 COPY pubspec.* ./
+COPY .env ./
 RUN dart pub get
 
 # Copy app source code (except anything in .dockerignore) and AOT compile app.
@@ -15,6 +16,7 @@ RUN dart compile exe bin/server.dart -o bin/server
 FROM scratch
 COPY --from=build /runtime/ /
 COPY --from=build /app/bin/server /app/bin/
+COPY --from=build /app/.env /
 
 # Start server.
 EXPOSE 8080

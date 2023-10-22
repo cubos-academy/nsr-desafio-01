@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  backend:
+    container_name: backend
+    restart: always
+    build:
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    networks:
+      - internal-network
+    ports:
+      - 8080:8080
+  ngrok:
+    image: ngrok/ngrok:alpine
+    command: "http backend:8080 --domain=selected-foal-previously.ngrok-free.app"
+    ports:
+      - "4040:4040"
+    expose:
+      - "4040"
+    env_file:
+      - .env
+    networks:
+      - internal-network
+    depends_on:
+      - backend
+networks:
+  internal-network:
+    driver: bridge

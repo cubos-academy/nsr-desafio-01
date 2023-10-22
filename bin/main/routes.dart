@@ -12,12 +12,8 @@ class Routes {
   Router get router {
     final router = Router();
 
-    // final nasaService = NASAService(
-    //   httpClient: HttpClient(),
-    // );
-
-    router.get('/', (Request request) {
-      return _telegramController.sayHelloTelegram(request);
+    router.post('/', (Request request) {
+      return _telegramController.getUpdatesFromWebhook(request);
     });
 
     return router;

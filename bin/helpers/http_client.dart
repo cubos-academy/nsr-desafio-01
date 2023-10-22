@@ -31,6 +31,8 @@ class HttpClient {
 
     final uri = Uri.parse(url);
 
+    print('GET - $uri');
+
     return adpatResponse(
       await http.get(uri),
     );

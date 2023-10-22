@@ -11,17 +11,7 @@ import './services/telegram_service.dart';
 import 'services/nasa_service.dart';
 
 void main(List<String> args) async {
-  init();
-
-  var routes = Routes(telegramController: TelegramController());
-
-  final handler = Pipeline()
-      .addMiddleware(
-        logRequests(),
-      )
-      .addHandler(
-        routes.router,
-      );
+  final handler = init();
 
   final port = int.parse(Platform.environment['PORT'] ?? '8080');
 
@@ -32,7 +22,7 @@ void main(List<String> args) async {
   print('Server listening on ${ip.address}:${server.port}');
 }
 
-void init() {
+init() {
   initializeDateFormatting('pt_BR');
 
   final client = HttpClient();
@@ -42,5 +32,21 @@ void init() {
     nasaService: NASAService(httpClient: client),
   );
 
+  var routes = Routes(
+    telegramController: TelegramController(
+      telegramService: telegramService,
+    ),
+  );
+
+  final handler = Pipeline()
+      .addMiddleware(
+        logRequests(),
+      )
+      .addHandler(
+        routes.router,
+      );
+
   telegramService.init();
+
+  return handler;
 }
