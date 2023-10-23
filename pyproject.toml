@@ -1,0 +1,227 @@
+[tool.interrogate]
+ignore-init-method = false
+ignore-init-module = true
+ignore-magic = false
+ignore-semiprivate = false
+ignore-private = false
+ignore-property-decorators = false
+ignore-module = false
+ignore-nested-functions = false
+ignore-nested-classes = false
+ignore-setters = false
+fail-under = 80
+exclude = ["setup.py", "docs", "build", ".tox", ".venv", "dist", "site"]
+ignore-regex = ["^get$", "^mock_.", ".*BaseClass."]
+# possible values: 0 (minimal output), 1 (-v), 2 (-vv)
+verbose = 0
+quiet = false
+whitelist-regex = []
+
+
+[tool.black]
+  # How many characters per line to allow.
+line-length=120
+
+  # Python versions that should be supported by Black's output
+target-version=['py39']
+
+  # A regular expression that matches files and directories that should be
+  # included on recursive searches. An empty value means all files are included
+  # regardless of the name.  Use forward slashes for directories on all platforms
+  # (Windows, too).  Exclusions are calculated first, inclusions later.
+include='\.pyi?$'
+
+  # A regular expression that matches files and directories that should be
+  # excluded on recursive searches. An empty value means no paths are excluded.
+  # Use forward slashes for directories on all platforms (Windows, too).
+  # Exclusions are calculated first, inclusions later.
+exclude='''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.eggs-info
+    | \.git          # root of the project
+    | \.tox
+    | \.venv
+    | \.sha1
+    | \.direnv/python_venv
+    | \.direnv/.sha1
+    | .\venv_format_python
+    | python_venv
+    | build
+    | dist
+    | site
+    | site.tox
+    | format_python
+  )/
+)
+'''
+
+[tool.flakehell]
+
+base = ["https://raw.githubusercontent.com/life4/flakehell/master/pyproject.toml"]
+  # Specify any flake8 options.
+  # Print the total number of errors.
+  # Default False
+count = true
+
+
+# Provide a comma-separated list of glob patterns to exclude from checks.
+exclude = [".git",
+      "_pycache_",
+      ".eggs",
+      ".env",
+      ".venv",
+      ".direnv",
+      ".tox",
+      ".sha1",
+      "build",
+      "dist",
+      "docs",
+      "site",
+      "format_python"
+]
+
+    # Select the formatter used to display errors to the user.
+  # This defaults to: default
+  #  - default
+  #  - pylint
+  #  - grouped
+  #  - colored
+  # The default formatter has a format string of:
+  # '%(path)s:%(row)d:%(col)d: %(code)s %(text)s'
+
+format="colored"
+
+    # Specify the number of subprocesses that Flake8 will use to run checks in parallel.
+    # Note
+    # This option is ignored on Windows because multiprocessing does not support
+    # Windows across all supported versions of Python.
+    # This defaults to: auto
+    # The default behaviour will use the number of CPUs on your machine as reported
+    # by multiprocessing.cpu_count().
+jobs = "auto"
+
+  # Also print output to stdout if output-file has been configured.
+tee = true
+
+# Provide a comma-separate list of glob patterns to include for checks.
+filename = "*.py"
+
+extended_default_ignore = []
+
+[tool.isort]
+  # Tells isort to set the known standard library based on the specified Python
+  # version. Default is to assume any Python 3 version could be the target, and use
+  # a union of all stdlib modules across versions. If auto is specified, the
+  # version of the interpreter used to run isort (currently: 38) will be used.
+  # Default:`py3`
+  # Files that sort imports should skip over. If you want to skip multiple files
+  # you should specify twice: --skip file1 --skip file2.
+  # Default: `('.bzr', '.direnv', '.eggs', '.git', '.hg', '.mypy_cache', '.nox',
+  # '.pants.d', '.svn', '.tox', '.venv', '_build', 'buck-out', 'build', 'dist',
+  # 'node_modules', 'venv')`
+skip=['.bzr',
+      '.direnv',
+      '.eggs',
+      '.git',
+      '.hg',
+      '.mypy_cache',
+      '.nox',
+      '.pants.d',
+      '.svn',
+      '.tox',
+      '.venv',
+      '_build',
+      'buck-out',
+      'build',
+      'dist',
+      'node_modules',
+      'venv',
+      'python_venv']
+
+ensure_newline_before_comments = true
+
+  # Treat project as a git repository and ignore files listed in .gitignore
+  # Default: `False`
+skip_gitignore=true
+
+  # The max length of an import line (used for wrapping long imports).
+  # Default: `79`
+line_length=80
+
+  # Multi line output (0-grid, 1-vertical, 2-hanging, 3-vert-hanging, 4-vert-grid,
+  # 5-vert-grid-grouped, 6-vert-grid-grouped-no-comma, 7-noqa,
+  # 8-vertical-hanging-indent-bracket, 9-vertical-prefix-from-module-import,
+  # 10-hanging-indent-with-parentheses).
+  # Default: `WrapModes.GRID`
+multi_line_output=3
+
+  # Use parentheses for line continuation on length limit instead of slashes.
+  # *NOTE*: This is separate from wrap modes, and only affects how individual
+  # lines that  are too long get continued, not sections of multiple imports.
+  # Default: `False`
+use_parentheses=true
+
+  # Includes a trailing comma on multi line imports that include parentheses.
+  # Default: `False`
+include_trailing_comma=true
+
+  # Force number of from imports (defaults to 2 when passed as CLI flag without
+  # value)to be grid wrapped regardless of line length. If 0 is passed in (the
+  # global default) only line length is considered.
+  # Default: `0`
+force_grid_wrap=0
+
+  # Profile
+  # Base profile type to use for configuration. Profiles include: black, django,
+  # pycharm, google, open_stack, plone, attrs, hug. As well as any shared profiles.
+  # Default: ``
+profile="black"
+
+  # Add an explicitly defined source path (modules within src paths have their
+  # imports automatically categorized as first_party).
+  # Default: `()`
+src_paths=["src"]
+
+  # Color Output
+  # Tells isort to use color in terminal output.
+  # Default: `False`
+color_output=true
+
+
+
+[tool.flakehell.plugins]
+# enable everything that starts from `flake8-`
+"flake8-" = ["+"]
+flake8-bandit = ["+*", "-S322"]
+flake8-bugbear = ["+*"]
+flake8-builtins = ["+*"]
+flake8-blind-except = ["+*"]
+flake8-comprehensions = ["+*"]
+flake8-darglint = ["+*"]
+flake8-docstrings = ["+*"]
+flake8-eradicate = ["+*"]
+flake8-isort = ["+*"]
+flake8-mutable = ["+*"]
+flake8-raise = ["+*"]
+flake8-report = ["+*"]
+flake8-requirements = ["+*"]
+flake8-pytest-style = ["+*"]
+flake8-spellcheck = ["+*"]
+
+[tool.pydocstyle]
+add_ignore = ["D100","D104","D203","D405", "D415"]
+convention = "google"
+
+[tool.autopep8]
+max_line_length = 120
+ignore = "E501,W6"  # or ["E501", "W6"]
+in-place = true
+recursive = true
+aggressive = 3
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.0.1"
+tag_format = "$version"

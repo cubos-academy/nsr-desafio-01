@@ -1,0 +1,13 @@
+commitizen
+interrogate
+black
+autopep8
+coverage
+isort
+pydocstyle
+pre-commit
+unimport
+pytest
+pytest-mock
+pytest-asyncio
+pytest-aiohttp
