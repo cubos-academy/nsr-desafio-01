@@ -69,4 +69,3 @@ python testes.py
 ## Linguagem
 
 [![Python 3](https://img.shields.io/badge/Python-3.12-blue?style=plastic)](https://www.python.org/)
-![Python Version from PEP 621 TOML](https://img.shields.io/python/required-version-toml)
