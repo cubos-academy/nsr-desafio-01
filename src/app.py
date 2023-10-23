@@ -21,7 +21,7 @@ def reply():
         return "ok."
 
     # Reply 2:
-    if "/" in message_text:
+    if "/" in message_text and message_text != "/start":
         date = message_text
         splittedDate = date.split("/")
 
