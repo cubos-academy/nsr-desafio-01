@@ -71,6 +71,8 @@ def send_foto_hoje(chat_id, context):
     
     foto_url = get_photo_today()
     context.bot.send_photo(chat_id=chat_id, photo=foto_url)
+    
+    return ConversationHandler.END
 
 
 def send_ultimos_5_dias(chat_id, context):
@@ -80,6 +82,8 @@ def send_ultimos_5_dias(chat_id, context):
     
     for url in api_urls:
         context.bot.send_photo(chat_id=chat_id, photo=url)
+    
+    return ConversationHandler.END
 
 
 def send_photo_date(update, context):
@@ -100,6 +104,8 @@ def register_automatic_send(chat_id, context):
         chat_id=chat_id,
         text=f"Você foi cadastrado no envio automatico e receberá a foto do dia, diariamente às 08:00 horas da manhã",
     )
+    
+    return ConversationHandler.END
     
     
     
