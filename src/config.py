@@ -1,4 +1,4 @@
-import requests, ngrok
+import requests
 from utils import telegramApiUrl
 
 # Webhook configuration:
