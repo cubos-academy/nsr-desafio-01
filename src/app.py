@@ -51,7 +51,7 @@ def reply():
     else:
         sendMessage(
             chat_id,
-            "👋 Olá, eu sou o <b>APOD Bot🌌</b> e eu consigo te mostrar a <b>Foto Astronomica do Dia</b> disponibilizada pela <b>NASA</b>!",
+            "👋 Olá, eu sou o <b>APOD Bot 🌌</b> e eu consigo te mostrar a <b>Foto Astronomica do Dia</b> disponibilizada pela <b>NASA</b>!",
             "html",
         )
         sendMessage(
