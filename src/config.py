@@ -1,5 +1,5 @@
 import requests
-from utils import telegramApiUrl
+from utils import telegramApiUrl, env_vars
 
 # Webhook configuration:
 def getWebhook():
