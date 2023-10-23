@@ -112,8 +112,6 @@ def run_bot():
         while True:
             chat_id = get_chat_id()
             
-            print(chat_id)
-            
             if chat_id is not None:
                 db.insert_sub(chat_id)
         
