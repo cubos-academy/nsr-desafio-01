@@ -1,44 +1,36 @@
-![](https://i.imgur.com/xG74tOh.png)
 
-# 🚀 Desafio Técnico: APOD Telegram Bot
+# APOD NASA PYTHON BOT
+Autor: Lucas Henrique da Silva
 
-## 🌌 Visão Geral do Projeto:
-Imagine poder começar o dia vendo a imensidão do espaço! Neste desafio, você utilizará suas habilidades em programação para trazer as estrelas mais perto de nós. Você criará um bot de Telegram que enviará a "Astronomy Picture of the Day" (APOD), fornecida pela API da NASA, diretamente em um chat no Telegram.
 
-## 🛠 O que fazer:
-1. Faça um fork deste repositório na sua conta, desenvolva o código e, ao finalizar, realize um Pull Request com o seu nome completo.
+### Explicando a lógica utilizada
 
-## 📋 Requisitos do Projeto:
-Seu aplicativo deve ser capaz de fazer o seguinte:
-- 📡 Integrar-se com a API da NASA para obter o APOD.
-- 🤖 Integrar-se com a API do Telegram para criar um bot.
-- 🌠 O bot deve ser capaz de enviar a imagem do dia automaticamente para um chat no Telegram.
-- 📆 Permitir que o usuário solicite a imagem APOD de uma data específica enviando uma mensagem para o bot.
-- ✨ (Opcional) Implementar comandos adicionais que você achar interessantes e úteis.
+A logica foi separar a utilizacao das API`s de forma que pudessemos isolar ao máximo a funcionalidade que cada API representaria.
 
-## ⚙️ Restrições Técnicas:
-- Você pode usar Python ou Dart para este projeto.
-- ❌ Evite usar bibliotecas e frameworks externos desnecessários.
-- 📝 O código deve ser escrito de maneira clara e limpa, seguindo boas práticas de programação.
+Na API da NASA, implementamos funcoes que retornam as imagen conforme escolha do usuario na solicitação ao Bot.
 
-## 🔍 Itens a serem avaliados:
-- ✔️ Correta integração e funcionamento com as APIs do Telegram e da NASA.
-- 💡 Implementação de recursos opcionais e criatividade.
+Na API do Telegram, ficou alem da programacao da API em sim, algumas validacoes e regras de funcionamento.
 
-## 📚 Recursos:
-- [Documentação da API da NASA](https://api.nasa.gov/)
-- [Documentação da API do Telegram](https://core.telegram.org/bots/api)
+Alem dessas APIs, fiz uso de um banco local para salvar chat_id dos usuários que gostariam de receber as fotos do dia, automaticamente em um horário pré-determinado.
 
-## 🏆 Premiação:
-O vencedor deste desafio receberá uma assinatura de 1 ano do OnDemand como recompensa pela sua inovação e esforço!
 
-## 📅 Cronograma:
-- 18/10 a 22/10 - Período de envio do desafio.
-- 23/10 a 27/10 - Período de correção.
-- 27/10 - Anúncio do vencedor.
-- 31/10 - Entrega do acesso da assinatura.
+### Dificuldades encontradas durante o desenvolvimento
+Devido ao pouco tempo e pelo escopo genárico, o foco precisou ser intensificado para que as ideias ou novas funcoes nao viessem a comprometer a entrega principal
 
-## 📥 Submissão:
-Ao concluir, faça um Pull Request para este repositório com seu código e um README explicando a lógica utilizada, dificuldades encontradas durante o desenvolvimento e como interagir com o bot (lista de comandos, etc.). No README, inclua também um link para o bot no Telegram para facilitar o teste. Lembre-se de incluir seu nome completo no Pull Request.
+Outra ponto é que a API do telegram para python é deveras confusa pois a principal lib tem diversas versões, com inumeras mudanças e foi preciso ter um bom controle de versao das dependencias.
 
-🌟 Boa sorte e bons céus estrelados!
+### Como interagir com o bot (lista de comandos, etc.)
+Para interagir com o bot, basta seguir os passos abaixo:
+
+1. Ao acessar o bot no telegram atraves [deste link](www.t.me/nasaApodPy_bot), o usuário inicia a interação com o bot, enviando o comando **/start**
+2. A partir do comando incial, o bot irá sugerir as seguintes opções para o usuário.
+* Foto do dia
+* Foto de uma determinada data (nessa opção, será necessário fornecer a data)
+* Foto dos últimos 5 dias (essa opção poderia ser customizada de várias formas)
+* Solicitar envio automatico diariamente
+
+3. Com base nessas solicitações, o bot irá realizar a ação conforme indicado.
+
+
+### Link para o bot no Telegram para facilitar o teste.
+www.t.me/nasaApodPy_bot 
