@@ -16,4 +16,4 @@ Para rodar esse projeto localmente, você precisa:
   2.1. NGROK_AUTHTOKEN # Requerida para utilizar o Ngrok (https://ngrok.com/);
   2.2. TELEGRAM_API_KEY # Requerida para utilizar a API do Telegram (https://core.telegram.org/bots/api);
   2.3. NASA_API_KEY # Requerida para utilizar as APIs da NASA (https://api.nasa.gov/).
-3. Após declarar as variáveis, basta rodar o projeto utilizando 'flask run'.
+3. Após declarar as variáveis, basta rodar o projeto utilizando 'flask --app src\app.py run'.

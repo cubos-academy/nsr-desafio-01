@@ -1,9 +1,5 @@
 import requests, ngrok
-from dotenv import dotenv_values
-
-env_vars = dotenv_values('.env')
-
-telegramApiUrl = f'https://api.telegram.org/bot{env_vars['TELEGRAM_API_KEY']}/'
+from utils import telegramApiUrl
 
 # Webhook configuration/initialization:
 def startNgrok():
