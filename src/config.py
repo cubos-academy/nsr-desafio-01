@@ -1,20 +1,21 @@
 import requests, ngrok
 from utils import telegramApiUrl
 
-# Webhook configuration/initialization:
-def startNgrok():
-  print('[STATUS]: Starting Ngrok service...')
-  tunnel = ngrok.connect("localhost:5000", authtoken_from_env=True)
+# Webhook configuration:
+def getWebhook():
+  print('[STATUS]: Getting Render webhook service informations...')
+  webhook = requests.get('https://api.render.com/v1/services?name=apod-bot-webhook&limit=1', headers={
+    'authorization': f'Bearer {env_vars['RENDER_API_KEY']}'
+  }).json()[0]
 
-  print(f'[STATUS]: Ngrok started successfully!')
-
-  return tunnel.url()
+  print(f'[STATUS]: Webhook get successfully!')
+  return webhook["service"]["serviceDetails"]["url"]
 
 def setBotWebhook():
   print('[STATUS]: Bot configuration started.')
 
-  # Get Ngrok public generated URL to webhook:
-  webhook_url = startNgrok();
+  # Get Render public URL to set webhook:
+  webhook_url = getWebhook();
   # ------------- #
 
 
